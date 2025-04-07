@@ -14,3 +14,6 @@ def products(request):
 
 def delivery(request):
     return render(request, 'products/delivery.html')
+
+def about(request):
+    return render(request, 'products/about.html')

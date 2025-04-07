@@ -19,13 +19,14 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from products.views import index, products, delivery
+from products.views import index, products, delivery, about
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('products', products, name='products'),
-    path('delivery', delivery, name='delivery')
+    path('delivery', delivery, name='delivery'),
+    path('about', about, name='about')
 ]
 
 if settings.DEBUG == True:
