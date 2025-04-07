@@ -2,60 +2,64 @@
 
 <!DOCTYPE html>
 <html lang="uk">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Каталог — LikedBooks</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Каталог — LikedBooks</title>
 
-  <link rel="stylesheet" href="{% static 'css/common.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/products.css' %}" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
-</head>
-<body>
+        <link rel="stylesheet" href="{% static 'css/common.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/products.css' %}" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
+    </head>
 
-  {% include "products/partials/navbar.html" %}
-  {% include "products/partials/search.html" %}
+    <body>
 
-  <main class="catalog-page">
-    <aside class="sidebar">
-      <h3>Категорії</h3>
-      <ul>
-        <li><a href="#">Художня література</a></li>
-        <li><a href="#">Трилери</a></li>
-        <li><a href="#">Фентезі</a></li>
-        <li><a href="#">Біографії</a></li>
-        <li><a href="#">Наукова література</a></li>
-      </ul>
-    </aside>
+        <div class="page-wrapper">
+            
+            {% include "products/partials/navbar.html" %}
+            {% include "products/partials/search.html" %}
 
-    <section class="product-list">
-      {% for product in products %}
-      <div class="product-card">
-        <img src="{{ product.image_url }}" alt="{{ product.title }}">
-        <h4>{{ product.title }}</h4>
-        <p>{{ product.description|truncatechars:100 }}</p>
-        <div class="product-bottom">
-          <span class="price">{{ product.price }} ₴</span>
-          <button class="buy-btn">Купити</button>
+        <main class="catalog-page">
+            <aside class="sidebar">
+            <h3>Категорії</h3>
+            <ul>
+                <li><a href="#">Художня література</a></li>
+                <li><a href="#">Трилери</a></li>
+                <li><a href="#">Фентезі</a></li>
+                <li><a href="#">Біографії</a></li>
+                <li><a href="#">Наукова література</a></li>
+            </ul>
+            </aside>
+
+            <section class="product-list">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="{{ product.image_url }}" alt="{{ product.title }}">
+                <h4>{{ product.title }}</h4>
+                <p>{{ product.description|truncatechars:100 }}</p>
+                <div class="product-bottom">
+                <span class="price">{{ product.price }} ₴</span>
+                <button class="buy-btn">Купити</button>
+                </div>
+            </div>
+            {% endfor %}
+            </section>
+        </main>
+
+        <div class="pagination">
+            {% if products.has_previous %}
+            <a href="?page={{ products.previous_page_number }}">« Назад</a>
+            {% endif %}
+
+            <span>Сторінка {{ products.number }} з {{ products.paginator.num_pages }}</span>
+
+            {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}">Далі »</a>
+            {% endif %}
         </div>
-      </div>
-      {% endfor %}
-    </section>
-  </main>
 
-  <div class="pagination">
-    {% if products.has_previous %}
-      <a href="?page={{ products.previous_page_number }}">« Назад</a>
-    {% endif %}
+            {% include "products/partials/footer.html" %}
 
-    <span>Сторінка {{ products.number }} з {{ products.paginator.num_pages }}</span>
-
-    {% if products.has_next %}
-      <a href="?page={{ products.next_page_number }}">Далі »</a>
-    {% endif %}
-  </div>
-
-  {% include "products/partials/footer.html" %}
-
-</body>
+        </div>
+    </body>
 </html>
