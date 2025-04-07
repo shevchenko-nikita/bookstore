@@ -29,6 +29,10 @@ body {
     color: #5e4634;
     font-weight: 500;
   }
+
+  .nav-links a:hover {
+    font-weight: bold;
+  }
   
   .nav-actions {
     display: flex;
