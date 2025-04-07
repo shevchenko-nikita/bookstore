@@ -23,19 +23,22 @@
             <aside class="sidebar">
             <h3>Категорії</h3>
             <ul>
-                <li><a href="#">Художня література</a></li>
+                {% for category in categories %}
+                <li><a href="#"> {{ category.name }} </a></li>
+                {% comment %} <li><a href="#">Художня література</a></li>
                 <li><a href="#">Трилери</a></li>
                 <li><a href="#">Фентезі</a></li>
                 <li><a href="#">Біографії</a></li>
-                <li><a href="#">Наукова література</a></li>
+                <li><a href="#">Наукова література</a></li> {% endcomment %}
+                {% endfor %}
             </ul>
             </aside>
 
             <section class="product-list">
             {% for product in products %}
             <div class="product-card">
-                <img src="{{ product.image_url }}" alt="{{ product.title }}">
-                <h4>{{ product.title }}</h4>
+                <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                <h4>{{ product.name }}</h4>
                 <p>{{ product.description|truncatechars:100 }}</p>
                 <div class="product-bottom">
                 <span class="price">{{ product.price }} ₴</span>

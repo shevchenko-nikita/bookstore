@@ -1,13 +1,13 @@
 from django.shortcuts import render
 
+from products.models import ProductCategory, Product
+
 def index(request):
     return render(request, 'products/index.html')
 
 def products(request):
     context = {
-        'image_url': 'static/images/book1.jpg',
-        'title': 'first book',
-        'description': 'test text for description la la la',
-        'price': 200,
+        'products': Product.objects.all(),
+        'categories': ProductCategory.objects.all(),
     }
     return render(request, 'products/products.html', context)
