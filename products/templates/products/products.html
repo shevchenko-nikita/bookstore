@@ -6,13 +6,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Каталог — LikedBooks</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'css/common.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/products.css' %}" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  {% comment %} {% include "partials/navbar.html" %} {% endcomment %}
-  {% comment %} {% include "partials/search.html" %} {% endcomment %}
+  {% include "products/partials/navbar.html" %}
+  {% include "products/partials/search.html" %}
 
   <main class="catalog-page">
     <aside class="sidebar">
@@ -29,7 +31,7 @@
     <section class="product-list">
       {% for product in products %}
       <div class="product-card">
-        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <img src="{{ product.image_url }}" alt="{{ product.title }}">
         <h4>{{ product.title }}</h4>
         <p>{{ product.description|truncatechars:100 }}</p>
         <div class="product-bottom">
@@ -53,7 +55,7 @@
     {% endif %}
   </div>
 
-  {% comment %} {% include "partials/footer.html" %} {% endcomment %}
+  {% include "products/partials/footer.html" %}
 
 </body>
 </html>
