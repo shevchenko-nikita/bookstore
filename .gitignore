@@ -1,0 +1,5 @@
+db.sqlite3
+products/__pycache__/
+*.pyo
+*.pyd
+*.pyc
