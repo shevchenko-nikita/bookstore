@@ -11,3 +11,6 @@ def products(request):
         'categories': ProductCategory.objects.all(),
     }
     return render(request, 'products/products.html', context)
+
+def delivery(request):
+    return render(request, 'products/delivery.html')
