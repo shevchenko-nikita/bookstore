@@ -44,6 +44,20 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']
+        labels = {
+            'username': 'Імʼя користувача',
+            'first_name': 'Імʼя',
+            'last_name': 'Прізвище',
+            'email': 'Електронна пошта',
+            'password1': 'Пароль',
+            'password2': 'Підтвердження паролю',
+        }
+        help_texts = {
+            'username': '',
+            'password1': '',
+            'password2': '',
+            'email': '',
+        }
         widgets = {
             'first_name': forms.TextInput(attrs={'placeholder': "Ім'я"}),
             'last_name': forms.TextInput(attrs={'placeholder': "Прізвище"}),

@@ -62,3 +62,7 @@ def delete_account(request):
         logout(request)
         user.delete()
         return redirect('login')
+    
+def logout_view(request):
+    logout(request)
+    return redirect('login')

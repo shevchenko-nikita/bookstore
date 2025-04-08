@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from products.views import index, products, delivery, about 
-from products.views import login_view, signup_view, profile_view, delete_account
+from products.views import login_view, signup_view, profile_view, delete_account, logout_view
 
 
 urlpatterns = [
@@ -34,7 +34,8 @@ urlpatterns = [
     path('delete_account', delete_account, name='delete_account'),
 
     path('login', login_view, name='login'),
-    path('signup', signup_view, name='signup')
+    path('signup', signup_view, name='signup'),
+    path('logout', logout_view, name='logout')
 ]
 
 if settings.DEBUG == True:
