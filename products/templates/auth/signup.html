@@ -11,23 +11,29 @@
     <body>
         <div class="wrapper">
             <div class="title"><span>Реєстрація</span></div>
-                <form action="#">
+                <form method="post" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+        
                     <div class="row">
-                        <input type="text" placeholder="Ім'я" required />
+                        {{ form.first_name }}
                     </div>
                     <div class="row">
-                        <input type="text" placeholder="Прізвище" required />
+                        {{ form.last_name }}
                     </div>
                     <div class="row">
-                        <input type="text" placeholder="username" required />
+                        {{ form.username }}
                     </div>
                     <div class="row">
-                        <input type="password" placeholder="Пароль" required />
+                        {{ form.email }}
                     </div>
                     <div class="row">
-                        <input type="password" placeholder="Підтвердіть пароль" required />
+                        {{ form.password1 }}
                     </div>
-
+                    <div class="row">
+                        {{ form.password2 }}
+                    </div>
+        
                     <div class="row button">
                         <input type="submit" value="Реєстрація" />
                     </div>

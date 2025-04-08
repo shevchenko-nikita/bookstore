@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from products.views import index, products, delivery, about, login, signup
+from products.views import index, products, delivery, about, login_view, signup_view
 
 
 urlpatterns = [
@@ -28,8 +28,8 @@ urlpatterns = [
     path('products', products, name='products'),
     path('delivery', delivery, name='delivery'),
     path('about', about, name='about'),
-    path('login', login, name='login'),
-    path('signup', signup, name='signup')
+    path('login', login_view, name='login'),
+    path('signup', signup_view, name='signup')
 ]
 
 if settings.DEBUG == True:

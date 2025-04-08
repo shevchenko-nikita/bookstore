@@ -11,8 +11,27 @@
     <body>
         <div class="wrapper">
             <div class="title"><span>Вхід</span></div>
-                <form action="#">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+
                     <div class="row">
+                        <i class="fas fa-user"></i>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="row">
+                        <i class="fas fa-lock"></i>
+                        {{ form.password }}
+                    </div>
+
+                    <div class="row button">
+                        <input type="submit" value="Вхід" />
+                    </div>
+
+                    <div class="signup-link">Ще не зареєстровані? <a href="{% url 'signup' %}">Зареєструватись</a></div>
+
+                    {% comment %} <div class="row">
                         <i class="fas fa-user"></i>
                         <input type="text" placeholder="username" required />
                     </div>
@@ -20,11 +39,10 @@
                         <i class="fas fa-lock"></i>
                         <input type="password" placeholder="Password" required />
                     </div>
-                    {% comment %} <div class="pass"><a href="#">Forgot password?</a></div> {% endcomment %}
                     <div class="row button">
                         <input type="submit" value="Вхід" />
                     </div>
-                    <div class="signup-link">Ще не зареєстровані? <a href="signup">Зареєструватись</a></div>
+                    <div class="signup-link">Ще не зареєстровані? <a href="signup">Зареєструватись</a></div> {% endcomment %}
                 </form>
         </div>
     </body>
