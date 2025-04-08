@@ -17,3 +17,9 @@ def delivery(request):
 
 def about(request):
     return render(request, 'products/about.html')
+
+def login(request):
+    return render(request, 'auth/login.html')
+
+def signup(request):
+    return render(request, 'auth/signup.html')

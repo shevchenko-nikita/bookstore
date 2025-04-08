@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Реєстрація</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+    <body>
+        <div class="wrapper">
+            <div class="title"><span>Реєстрація</span></div>
+                <form action="#">
+                    <div class="row">
+                        <input type="text" placeholder="Ім'я" required />
+                    </div>
+                    <div class="row">
+                        <input type="text" placeholder="Прізвище" required />
+                    </div>
+                    <div class="row">
+                        <input type="text" placeholder="username" required />
+                    </div>
+                    <div class="row">
+                        <input type="password" placeholder="Пароль" required />
+                    </div>
+                    <div class="row">
+                        <input type="password" placeholder="Підтвердіть пароль" required />
+                    </div>
+
+                    <div class="row button">
+                        <input type="submit" value="Реєстрація" />
+                    </div>
+                    <div class="signup-link">Вже зареєстровані? <a href="{% url 'login' %}">Увійти</a></div>
+                </form>
+        </div>
+    </body>
+</html>
