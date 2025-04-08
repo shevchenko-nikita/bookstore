@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, logout
 
 from products.models import ProductCategory, Product
-from products.forms import LoginForm, RegisterForm
+from products.forms import LoginForm, RegisterForm, ProfileForm
 
 def index(request):
     return render(request, 'products/index.html')
@@ -40,3 +42,23 @@ def signup_view(request):
     else:
         form = RegisterForm()
     return render(request, 'auth/signup.html', {'form': form})
+
+@login_required
+def profile_view(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Зміни збережено.')
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=request.user)
+    return render(request, 'user/profile.html', {'form': form})
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        logout(request)
+        user.delete()
+        return redirect('login')

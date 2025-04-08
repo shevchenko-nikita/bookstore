@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Профіль</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static '/css/common.css' %}" />
+</head>
+<body>
+    {% include "products/partials/navbar.html" %}
+    
+    <div class="profile-container">
+        <h2>Мій профіль</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save-btn">Зберегти</button>
+        </form>
+
+        <form method="post" action="{% url 'delete_account' %}">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Видалити акаунт</button>
+        </form>
+    </div>
+    
+    {% include "products/partials/footer.html" %}
+</body>
+</html>

@@ -40,3 +40,13 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': "Ім'я"}),
+            'last_name': forms.TextInput(attrs={'placeholder': "Прізвище"}),
+            'username': forms.TextInput(attrs={'placeholder': "Ім'я користувача"}),
+            'email': forms.EmailInput(attrs={'placeholder': "Email"}),
+        }

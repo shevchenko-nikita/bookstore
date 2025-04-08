@@ -19,15 +19,20 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from products.views import index, products, delivery, about, login_view, signup_view
+from products.views import index, products, delivery, about 
+from products.views import login_view, signup_view, profile_view, delete_account
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', index, name='index'),
     path('products', products, name='products'),
     path('delivery', delivery, name='delivery'),
     path('about', about, name='about'),
+    path('profile', profile_view, name='profile'),
+    path('delete_account', delete_account, name='delete_account'),
+
     path('login', login_view, name='login'),
     path('signup', signup_view, name='signup')
 ]
