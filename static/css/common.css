@@ -42,6 +42,7 @@ body {
 .search-section {
     text-align: center;
     margin: 2rem 0;
+    position: relative;
 }
   
 .search-bar {
@@ -68,7 +69,31 @@ body {
     font-size: 1.2rem;
     color: #fff;
 }
-  
+
+.search-results {
+    position: absolute;
+    background-color: #fffaf3;
+    border: 1px solid #e2d5c0;
+    border-radius: 12px;
+    width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 5px;
+    z-index: 1000;
+    left: 50%;  /* добавлено */
+    transform: translateX(-50%);
+}
+
+.search-results a {
+    display: block;
+    padding: 10px;
+    color: #5e4634;
+    text-decoration: none;
+}
+
+.search-results a:hover {
+    background-color: #f2e8da;
+}
   
   /* Подвал */
 .footer {

@@ -1,7 +1,15 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<div class="search-section">
+{% comment %} <div class="search-section">
     <div class="search-bar">
     <input type="text" placeholder="Пошук книг..." />
     <button><span><i class='bx bx-search'></i></span></button>
     </div>
+</div> {% endcomment %}
+
+<div class="search-section">
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Пошук книг..." autocomplete="off" />
+        <button><span><i class='bx bx-search'></i></span></button>
+    </div>
+    <div id="search-results" class="search-results"></div>
 </div>

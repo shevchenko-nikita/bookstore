@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, logout
-
+from django.http import JsonResponse
+from django.db.models import Q
 from products.models import ProductCategory, Product
 from products.forms import LoginForm, RegisterForm, ProfileForm
 
@@ -26,6 +27,19 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:4]
     return render(request, 'products/product_detail.html', {'product': product, 'related_products': related_products})
+
+def search_products(request):
+    query = request.GET.get('q', '')
+    results = []
+    if query:
+        products = Product.objects.filter(Q(name__icontains=query) | Q(author_name__icontains=query))[:5]
+        for product in products:
+            results.append({
+                'name': product.name,
+                'price': str(product.price),
+                'url': f'/products/{product.id}/',
+            })
+    return JsonResponse({'results': results})
 
 def login_view(request):
     if request.method == 'POST':
