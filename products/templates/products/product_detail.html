@@ -1,0 +1,71 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <title>LikedBooks</title>
+        
+        <link rel="stylesheet" href="{% static '/css/product_detail.css' %}" />
+        <link rel="stylesheet" href="{% static '/css/common.css' %}" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body>
+        {% include "products/partials/navbar.html" %}
+        {% include "products/partials/search.html" %}
+        
+        <div class="product-detail-container">
+            <div class="product-image">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            </div>
+            <div class="product-info">
+                <h1>{{ product.name }}</h1>
+                <h3>Автор: {{ product.author_name }}</h3>
+                <h1>Опис</h1>
+                <p class="product-description">{{ product.description }}</p>
+                <p class="product-price">{{ product.price }} грн</p>
+                <p class="product-quantity">
+                    {% if product.quantity > 0 %}
+                        В наявності: {{ product.quantity }} шт.
+                    {% else %}
+                        <span class="out-of-stock">Нет в наличии</span>
+                    {% endif %}
+                </p>
+                {% comment %} {% url 'add_to_cart' product.id %} {% endcomment %}
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {% if product.quantity > 0 %}
+                        <button type="submit" class="buy-btn">Купить</button>
+                    {% else %}
+                        <button class="buy-btn" disabled>Недоступно</button>
+                    {% endif %}
+                </form>
+
+                {% if related_products %}
+                    <div class="related-products">
+                        <h2>Схожі книги</h2>
+                        <div class="product-list">
+                            {% for related_product in related_products %}
+                            <div class="product-card">
+                                <a href="{% url 'product_detail' related_product.id %}">
+                                    <img src="{{ related_product.image.url }}" alt="{{ related_product.name }}">
+                                    <h4>{{ related_product.name }}</h4>
+                                </a>
+                                <p class="price">{{ related_product.price }} грн</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% include "products/partials/footer.html" %}
+    </body>
+</html>

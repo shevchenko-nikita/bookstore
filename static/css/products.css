@@ -67,6 +67,10 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
 }
+
+.product-card a {
+    text-decoration: none;
+}
   
 .product-card img {
     width: 100%;

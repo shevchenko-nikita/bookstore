@@ -32,8 +32,10 @@
             <section class="product-list">
             {% for product in products %}
             <div class="product-card">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                <h4>{{ product.name }}</h4>
+                <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <h4>{{ product.name }}</h4>
+                </a>
                 <p>{{ product.description|truncatechars:100 }}</p>
                 <div class="product-bottom">
                 <span class="price">{{ product.price }} ₴</span>
@@ -44,7 +46,7 @@
             </section>
         </main>
 
-        <div class="pagination">
+        {% comment %} <div class="pagination">
             {% if products.has_previous %}
             <a href="?page={{ products.previous_page_number }}">« Назад</a>
             {% endif %}
@@ -54,7 +56,7 @@
             {% if products.has_next %}
             <a href="?page={{ products.next_page_number }}">Далі »</a>
             {% endif %}
-        </div>
+        </div> {% endcomment %}
 
             {% include "products/partials/footer.html" %}
 

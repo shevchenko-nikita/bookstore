@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, logout
 
 from products.models import ProductCategory, Product
@@ -21,6 +21,11 @@ def delivery(request):
 
 def about(request):
     return render(request, 'products/about.html')
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:4]
+    return render(request, 'products/product_detail.html', {'product': product, 'related_products': related_products})
 
 def login_view(request):
     if request.method == 'POST':
