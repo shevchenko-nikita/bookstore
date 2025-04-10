@@ -4,8 +4,9 @@
 }
 
 .hero img {
-    width: 90%;
-    height: 850px;
+    width: 75%;
+    /* height: 850px; */
+    border-radius: 3%;
     /* height: 500px; */
     /* object-fit: cover; */
     /* display: block; */
