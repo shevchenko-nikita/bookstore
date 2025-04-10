@@ -8,26 +8,30 @@
 
     <link rel="stylesheet" href="{% static '/css/common.css' %}" />
 </head>
-<body>
-    {% include "products/partials/navbar.html" %}
-    <div class="profile-wrapper">
-        <h1>Мій профіль</h1>
-        <form method="post" class="profile-form">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="save-button">Зберегти</button>
-        </form>
+    <body>
+        <div class="page-wrapper">
+            {% include "products/partials/navbar.html" %}
+            
+            <div class="profile-wrapper">
+                <h1>Мій профіль</h1>
+                <form method="post" class="profile-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="save-button">Зберегти</button>
+                </form>
 
-        <form method="post" action="{% url 'delete_account' %}" class="delete-form">
-            {% csrf_token %}
-            <button type="submit" class="delete-button">✖ Видалити акаунт</button>
-        </form>
+                <form method="post" action="{% url 'delete_account' %}" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-button">✖ Видалити акаунт</button>
+                </form>
 
-        <form method="post" action="{% url 'logout' %}" class="logout-form">
-            {% csrf_token %}
-            <button type="submit" class="logout-button">⎋ Вийти</button>
-        </form>
-    </div>
-    {% include "products/partials/footer.html" %}
-</body>
+                <form method="post" action="{% url 'logout' %}" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">⎋ Вийти</button>
+                </form>
+            </div>
+
+            {% include "products/partials/footer.html" %}
+        <div>
+    </body>
 </html>

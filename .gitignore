@@ -3,3 +3,5 @@ products/__pycache__/
 *.pyo
 *.pyd
 *.pyc
+
+media/products_images/
