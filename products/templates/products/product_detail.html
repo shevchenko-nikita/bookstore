@@ -39,14 +39,16 @@
                     {% endif %}
                 </p>
                 {% comment %} {% url 'add_to_cart' product.id %} {% endcomment %}
-                <form method="post" action="">
-                    {% csrf_token %}
+                {% comment %} <form method="post" action=""> {% endcomment %}
+                    {% comment %} {% csrf_token %} {% endcomment %}
                     {% if product.quantity > 0 %}
-                        <button type="submit" class="buy-btn">Купить</button>
+                        <a href="{% url 'basket_add' product.id %}">
+                            <button type="submit" class="buy-btn">Купить</button>
+                        </a>
                     {% else %}
-                        <button class="buy-btn" disabled>Недоступно</button>
+                        <button class="buy-btn" disabled>Немає в наявності</button>
                     {% endif %}
-                </form>
+                {% comment %} </form> {% endcomment %}
 
                 {% if related_products %}
                     <div class="related-products">
