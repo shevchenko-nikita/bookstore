@@ -1,0 +1,88 @@
+.basket-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fdfbf9;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.basket-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: #5e4634;
+}
+
+.basket-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1rem;
+    align-items: center;
+}
+
+.basket-item img {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.basket-details {
+    flex-grow: 1;
+}
+
+.basket-details h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #3c2f23;
+}
+
+.basket-details p {
+    margin: 0.3rem 0;
+    color: #6b5d50;
+}
+
+.basket-summary {
+    text-align: right;
+    margin-top: 2rem;
+}
+
+.basket-summary h3 {
+    margin-bottom: 1rem;
+}
+
+.buy-btn {
+    background-color: #5e4634;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buy-btn:hover {
+    background-color: #3e3024;
+}
+
+.remove-btn {
+    background-color: #f3d1cd;
+    color: #5a1e1e;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: auto;
+    transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+    background-color: #e3b4b0;
+}

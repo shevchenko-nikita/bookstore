@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, logout
 from django.http import JsonResponse
 from django.db.models import Q
-from products.models import ProductCategory, Product
+from products.models import ProductCategory, Product, Basket
 from products.forms import LoginForm, RegisterForm, ProfileForm
 
 def index(request):
@@ -96,3 +96,35 @@ def delete_account(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def basket_add(request, product_id):
+    product = Product.objects.get(id=product_id)
+    baskets = Basket.objects.filter(user=request.user, product=product)
+
+    if not baskets.exists():
+        Basket.objects.create(user=request.user, product=product, quantity=1)
+    else:
+        basket = baskets.first()
+        basket.quantity += 1
+        basket.save()
+    
+    return redirect(request.META.get('HTTP_REFERER', 'products'))
+
+@login_required
+def basket_view(request):
+    baskets = Basket.objects.filter(user=request.user)
+    total_price = sum(item.product.price * item.quantity for item in baskets)
+
+    return render(request, 'products/basket.html', {
+        'baskets': baskets,
+        'total_price': total_price,
+    })
+
+@login_required
+def basket_remove(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    basket_item = Basket.objects.filter(user=request.user, product=product).first()
+    if basket_item:
+        basket_item.delete()
+    return redirect("basket")

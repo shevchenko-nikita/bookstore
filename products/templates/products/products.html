@@ -39,8 +39,10 @@
                 </a>
                 <p>{{ product.description|truncatechars:100 }}</p>
                 <div class="product-bottom">
-                <span class="price">{{ product.price }} ₴</span>
-                <button class="buy-btn">Купити</button>
+                    <span class="price">{{ product.price }} ₴</span>
+                    <a href="{% url 'basket_add' product.id %}">
+                        <button class="buy-btn">Купити</button>
+                    </a>
                 </div>
             </div>
             {% endfor %}

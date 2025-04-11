@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length = 128)
@@ -18,3 +19,12 @@ class Product(models.Model):
 
     def __str__(self):
         return f'Книга: { self.name } | Категорія: {self.category.name}'
+    
+class Basket(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    quantity=models.PositiveSmallIntegerField(default=0)
+    created_timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Корзина для [self.user.username] | продукт: [self.product.name]'

@@ -21,7 +21,7 @@ from django.conf import settings
 
 from products.views import index, products, delivery, about, product_detail, products_by_category
 from products.views import login_view, signup_view, profile_view, delete_account, logout_view
-from products.views import search_products
+from products.views import search_products, basket_add, basket_view, basket_remove
 
 
 urlpatterns = [
@@ -37,6 +37,10 @@ urlpatterns = [
     path('products/<int:product_id>/', product_detail, name='product_detail'),
 
     path('search/', search_products, name='search_products'),
+
+    path('baskets/add/<int:product_id>/', basket_add, name='basket_add'),
+    path('basket/', basket_view, name='basket'),
+    path("basket/remove/<int:product_id>/", basket_remove, name="basket_remove"),
 
     path('login', login_view, name='login'),
     path('signup', signup_view, name='signup'),
