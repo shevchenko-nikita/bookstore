@@ -28,6 +28,9 @@ def products_by_category(request, category_id):
     }
     return render(request, 'products/products.html', context)
 
+def contact(request):
+    return render(request, 'products/contact.html')
+
 def delivery(request):
     return render(request, 'products/delivery.html')
 

@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Зв'язок з нами — LikedBooks</title>
+    <link rel="stylesheet" href="{% static 'css/common.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include "products/partials/navbar.html" %}
+
+    <div class="page-wrapper">
+        <div class="contact-wrapper">
+            <h2>Зв'язок з нами</h2>
+            <div class="contact-info">
+                <p><strong>Телефон:</strong> +38 (050) 123 45 67</p>
+                <p><strong>Пошта:</strong> support@likedbooks.ua</p>
+                <p><strong>Telegram:</strong> <a href="https://t.me/likedbooks" target="_blank">@likedbooks</a></p>
+            </div>
+
+            <form class="contact-form" onsubmit="event.preventDefault(); this.reset(); alert('Дякуємо за звернення! Ми звʼяжемося з вами найближчим часом.');">
+                <input type="text" name="phone" placeholder="Ваш номер телефону" required>
+                <textarea name="message" rows="5" placeholder="Опишіть проблему або залиште повідомлення..." required></textarea>
+                <button type="submit">Відправити</button>
+            </form>
+
+            <div class="extra-text">
+                <p>Ми цінуємо кожного клієнта і завжди відкриті до ваших відгуків. Якщо у вас виникли труднощі з оформленням замовлення, доставкою або ви просто хочете поділитися своїми враженнями — не соромтесь писати нам.</p>
+                <p>Наша служба підтримки працює щодня з 09:00 до 20:00. Ми відповідаємо протягом кількох годин.</p>
+            </div>
+        </div>
+    </div>
+
+    {% include "products/partials/footer.html" %}
+</body>
+</html>
