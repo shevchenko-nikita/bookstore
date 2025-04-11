@@ -32,7 +32,7 @@ def search_products(request):
     query = request.GET.get('q', '')
     results = []
     if query:
-        products = Product.objects.filter(Q(name__icontains=query) | Q(author_name__icontains=query))[:5]
+        products = Product.objects.filter(Q(name__icontains=query) )[:5]
         for product in products:
             results.append({
                 'name': product.name,
