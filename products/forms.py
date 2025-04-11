@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+from .models import Order
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -64,3 +65,8 @@ class ProfileForm(forms.ModelForm):
             'username': forms.TextInput(attrs={'placeholder': "Ім'я користувача"}),
             'email': forms.EmailInput(attrs={'placeholder': "Email"}),
         }
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['first_name', 'last_name', 'phone', 'email', 'address', 'payment_method']

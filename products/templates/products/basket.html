@@ -34,7 +34,9 @@
                         {% endfor %}
                         <div class="basket-summary">
                             <h3>Загальна сума: <span class="price">{{ total_price }} ₴</span></h3>
-                            <button class="buy-btn">Замовити</button>
+                            <a href="{% url "checkout" %}">
+                                <button class="buy-btn">Замовити</button>
+                            </a>
                         </div>
                     {% else %}
                         <p style="text-align: center;">Ваша корзина порожня.</p>

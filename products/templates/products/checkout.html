@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Каталог — LikedBooks</title>
+
+        <link rel="stylesheet" href="{% static 'css/common.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        {% include "products/partials/navbar.html" %}
+
+        <div class="page-wrapper">
+            <div class="checkout-wrapper">
+                <h2>Оформлення замовлення</h2>
+                <div class="checkout-content">
+                    <form method="post" class="checkout-form">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="buy-btn">Оформити замовлення</button>
+                    </form>
+
+                    <div class="order-summary">
+                        <h3>Ваше замовлення</h3>
+                        <ul>
+                            {% for item in baskets %}
+                            <li>{{ item.product.name }} — {{ item.quantity }} шт. × {{ item.product.price }} ₴</li>
+                            {% endfor %}
+                        </ul>
+                        <p><strong>Сумарна ціна:</strong> {{ total_price }} ₴</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include "products/partials/footer.html" %}
+    </body>
+</html>

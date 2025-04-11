@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, logout
 from django.http import JsonResponse
 from django.db.models import Q
-from products.models import ProductCategory, Product, Basket
-from products.forms import LoginForm, RegisterForm, ProfileForm
+from products.models import ProductCategory, Product, Basket, OrderItem
+from products.forms import LoginForm, RegisterForm, ProfileForm, OrderForm
 
 def index(request):
     return render(request, 'products/index.html')
@@ -128,3 +128,40 @@ def basket_remove(request, product_id):
     if basket_item:
         basket_item.delete()
     return redirect("basket")
+
+@login_required
+def checkout(request):
+    baskets = Basket.objects.filter(user=request.user)
+    if not baskets.exists():
+        return redirect('products')
+
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user = request.user
+            order.save()
+
+            for basket in baskets:
+                OrderItem.objects.create(
+                    order=order,
+                    product=basket.product,
+                    quantity=basket.quantity,
+                    price=basket.product.price
+                )
+            baskets.delete()
+            return redirect('index')
+    else:
+        form = OrderForm(initial={
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'email': request.user.email
+        })
+
+    total_price = sum(item.product.price * item.quantity for item in baskets)
+
+    return render(request, 'products/checkout.html', {
+        'form': form,
+        'baskets': baskets,
+        'total_price': total_price
+    })
