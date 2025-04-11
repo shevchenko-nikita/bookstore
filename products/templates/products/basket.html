@@ -8,41 +8,40 @@
     <link rel="stylesheet" href="{% static 'css/common.css' %}" />
     <link rel="stylesheet" href="{% static 'css/basket.css' %}" />
 </head>
-<body>
-<div class="page-wrapper">
-    {% include "products/partials/navbar.html" %}
-    
-    <main>
-        <div class="basket-container">
-            <h2 class="basket-header">Ваше замовлення</h2>
+    <body>
+        <div class="page-wrapper">
+            {% include "products/partials/navbar.html" %}
+            
+            <main>
+                <div class="basket-container">
+                    <h2 class="basket-header">Ваше замовлення</h2>
 
-            {% if baskets %}
-                {% for item in baskets %}
-                <div class="basket-item">
-                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                    <div class="basket-details">
-                        <h4>{{ item.product.name }}</h4>
-                        <p>Кількість: {{ item.quantity }}</p>
-                        <p>Ціна за одиницю: {{ item.product.price }} ₴</p>
-                        <p>Сума: {{ item.product.price|floatformat:2|add:item.quantity|floatformat:2 }} ₴</p>
-                    </div>
-                    <form method="post" action="{% url 'basket_remove' item.product.id %}">
-                        {% csrf_token %}
-                        <button type="submit" class="remove-btn">Видалити</button>
-                    </form>
+                    {% if baskets %}
+                        {% for item in baskets %}
+                        <div class="basket-item">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                            <div class="basket-details">
+                                <h4>{{ item.product.name }}</h4>
+                                <p>Кількість: {{ item.quantity }}</p>
+                                <p>Ціна за одиницю: {{ item.product.price }} ₴</p>
+                                <p>Сума: {{ item.product.price|floatformat:2|add:item.quantity|floatformat:2 }} ₴</p>
+                            </div>
+                            <form method="post" action="{% url 'basket_remove' item.product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="remove-btn">Видалити</button>
+                            </form>
+                        </div>
+                        {% endfor %}
+                        <div class="basket-summary">
+                            <h3>Загальна сума: <span class="price">{{ total_price }} ₴</span></h3>
+                            <button class="buy-btn">Замовити</button>
+                        </div>
+                    {% else %}
+                        <p style="text-align: center;">Ваша корзина порожня.</p>
+                    {% endif %}
                 </div>
-                {% endfor %}
-                <div class="basket-summary">
-                    <h3>Загальна сума: <span class="price">{{ total_price }} ₴</span></h3>
-                    <button class="buy-btn">Замовити</button>
-                </div>
-            {% else %}
-                <p style="text-align: center;">Ваша корзина порожня.</p>
-            {% endif %}
+            </main>
         </div>
-    </main>
-
-    {% include "products/partials/footer.html" %}
-</div>
-</body>
+        {% include "products/partials/footer.html" %}
+    </body>
 </html>
