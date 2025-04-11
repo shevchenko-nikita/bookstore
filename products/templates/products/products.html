@@ -24,7 +24,8 @@
             <h3>Категорії</h3>
             <ul>
                 {% for category in categories %}
-                <li><a href="#"> {{ category.name }} </a></li>
+                <li><a href="{% url 'products_by_category' category.id %}"
+                    class="{% if category == selected_category %}active{% endif %}"> {{ category.name }} </a></li>
                 {% endfor %}
             </ul>
             </aside>

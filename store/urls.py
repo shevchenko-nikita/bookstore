@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from products.views import index, products, delivery, about, product_detail
+from products.views import index, products, delivery, about, product_detail, products_by_category
 from products.views import login_view, signup_view, profile_view, delete_account, logout_view
 from products.views import search_products
 
@@ -29,6 +29,7 @@ urlpatterns = [
 
     path('', index, name='index'),
     path('products', products, name='products'),
+    path('products/category/<int:category_id>/', products_by_category, name='products_by_category'),
     path('delivery', delivery, name='delivery'),
     path('about', about, name='about'),
     path('profile', profile_view, name='profile'),

@@ -17,6 +17,17 @@ def products(request):
     }
     return render(request, 'products/products.html', context)
 
+def products_by_category(request, category_id):
+    category = ProductCategory.objects.get(id=category_id)
+    products = Product.objects.filter(category=category)
+
+    context = {
+        'products': products,
+        'categories': ProductCategory.objects.all(),
+        'selected_category': category
+    }
+    return render(request, 'products/products.html', context)
+
 def delivery(request):
     return render(request, 'products/delivery.html')
 
